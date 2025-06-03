@@ -2,6 +2,7 @@ package my_project.mini_social_network.models;
 
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 
 @Entity

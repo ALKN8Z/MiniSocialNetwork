@@ -1,13 +1,15 @@
 package my_project.mini_social_network.services;
 
-import my_project.mini_social_network.models.User;
+import my_project.mini_social_network.dto.UserRequest;
+import my_project.mini_social_network.dto.UserResponse;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserService {
-    User saveUser(User user);
-    Optional<User> findByEmail(String email);
-    Optional<User> findByName(String name);
-    List<User> findAll();
+    UserResponse saveUser(UserRequest user);
+    UserResponse updateUser(int id, UserRequest user);
+    void deleteUser(int id);
+    UserResponse findByEmail(String email);
+    List<UserResponse> findByName(String name);
+    List<UserResponse> findAll();
 }
