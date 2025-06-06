@@ -1,4 +1,4 @@
-package my_project.mini_social_network.dto;
+package my_project.mini_social_network.dto.responses;
 
 import lombok.Data;
 import my_project.mini_social_network.models.Role;

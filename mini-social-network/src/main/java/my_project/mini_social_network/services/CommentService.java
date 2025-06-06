@@ -8,9 +8,10 @@ import my_project.mini_social_network.models.User;
 import java.util.List;
 
 public interface CommentService {
-    Comment saveComment(Comment comment);
+    Comment saveComment(CommentDto commentDto);
     List<Comment> findByPost(Post post);
     List<Comment> findByUser(User user);
     Comment updateComment(int commentId, CommentDto commentDto);
     void deleteComment(int commentId);
+    Comment findByCommentId(int commentId);
 }

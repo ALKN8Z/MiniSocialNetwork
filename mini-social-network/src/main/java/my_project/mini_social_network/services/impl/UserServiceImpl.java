@@ -1,8 +1,8 @@
 package my_project.mini_social_network.services.impl;
 
 import lombok.RequiredArgsConstructor;
-import my_project.mini_social_network.dto.UserRequest;
-import my_project.mini_social_network.dto.UserResponse;
+import my_project.mini_social_network.dto.requests.UserRequest;
+import my_project.mini_social_network.dto.responses.UserResponse;
 import my_project.mini_social_network.exceptions.ResourceNotFoundException;
 import my_project.mini_social_network.models.Role;
 import my_project.mini_social_network.repositories.UserRepository;
@@ -75,6 +75,11 @@ public class UserServiceImpl implements UserService {
     public List<UserResponse> findAll() {
         return userRepository.findAll().stream().map(user ->
                 modelMapper.map(user, UserResponse.class)).collect(Collectors.toList());
+    }
+
+    @Override
+    public User findByUserId(int id) {
+        return userRepository.findById(id).orElse(null);
     }
 
 }

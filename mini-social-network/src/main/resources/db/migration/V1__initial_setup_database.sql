@@ -42,3 +42,5 @@ ALTER TABLE comments
 
 ALTER TABLE posts
     ADD CONSTRAINT posts_user_id_fkey FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE NO ACTION;
+
+alter table users add column password varchar(255) not null default '12345';

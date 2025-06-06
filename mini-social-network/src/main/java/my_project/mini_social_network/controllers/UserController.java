@@ -1,12 +1,11 @@
 package my_project.mini_social_network.controllers;
 
 import lombok.RequiredArgsConstructor;
-import my_project.mini_social_network.dto.UserRequest;
-import my_project.mini_social_network.dto.UserResponse;
-import my_project.mini_social_network.models.User;
+import my_project.mini_social_network.annotations.IsOwnerOrAdmin;
+import my_project.mini_social_network.dto.requests.UserRequest;
+import my_project.mini_social_network.dto.responses.UserResponse;
 import my_project.mini_social_network.services.UserService;
 import org.modelmapper.ModelMapper;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,11 +25,13 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
+    @IsOwnerOrAdmin(indexOfParameterContainsResourceId = 0, classOfRequiredMethod = UserService.class, methodName = "findByUserId")
     public UserResponse updateUser(@PathVariable int id, @RequestBody UserRequest requestUser) {
         return userService.updateUser(id, requestUser);
     }
 
     @DeleteMapping("/{id}")
+    @IsOwnerOrAdmin(indexOfParameterContainsResourceId = 0, classOfRequiredMethod = UserService.class, methodName = "findByUserId")
     public ResponseEntity<String> deleteUser(@PathVariable int id) {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();

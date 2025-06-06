@@ -1,7 +1,8 @@
 package my_project.mini_social_network.services;
 
-import my_project.mini_social_network.dto.UserRequest;
-import my_project.mini_social_network.dto.UserResponse;
+import my_project.mini_social_network.dto.requests.UserRequest;
+import my_project.mini_social_network.dto.responses.UserResponse;
+import my_project.mini_social_network.models.User;
 
 import java.util.List;
 
@@ -12,4 +13,5 @@ public interface UserService {
     UserResponse findByEmail(String email);
     List<UserResponse> findByName(String name);
     List<UserResponse> findAll();
+    User findByUserId(int id);
 }

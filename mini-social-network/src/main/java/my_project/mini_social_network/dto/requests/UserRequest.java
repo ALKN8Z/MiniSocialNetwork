@@ -1,4 +1,4 @@
-package my_project.mini_social_network.dto;
+package my_project.mini_social_network.dto.requests;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

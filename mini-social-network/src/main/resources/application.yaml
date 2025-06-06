@@ -16,3 +16,6 @@ spring:
     enabled: true
     locations: classpath:db/migration
     baseline-on-migrate: true
+jwt:
+  secret: gh23hj45f3g2h45f234hfg5235hj2ya23jhh
+  expiresIn: 3600000
