@@ -4,7 +4,6 @@
     <option name="snapshotDbValue" value="b27ddda3-5ba5-4e95-beb8-8a303156880b" />
     <option name="snapshotDirValue" value="$PROJECT_DIR$/mini-social-network/src/main/resources/db/migration" />
     <option name="sourceDbValue" value="b27ddda3-5ba5-4e95-beb8-8a303156880b" />
-    <option name="sourceDiffType" value="DB" />
     <option name="sourceModelValue" value="mini-social-network:mini-social-network" />
     <option name="targetDbValue" value="b27ddda3-5ba5-4e95-beb8-8a303156880b" />
   </component>

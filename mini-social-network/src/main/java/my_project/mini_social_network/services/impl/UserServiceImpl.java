@@ -8,6 +8,7 @@ import my_project.mini_social_network.models.Role;
 import my_project.mini_social_network.repositories.UserRepository;
 import my_project.mini_social_network.services.UserService;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import my_project.mini_social_network.models.User;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     @Transactional
@@ -29,6 +31,7 @@ public class UserServiceImpl implements UserService {
         User newUser = User.builder()
                 .name(userRequest.getName())
                 .email(userRequest.getEmail())
+                .password(passwordEncoder.encode(userRequest.getPassword()))
                 .role(Role.USER)
                 .build();
 
@@ -36,6 +39,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public UserResponse updateUser(int id, UserRequest userRequest) {
         User userToBeUpdated = User.builder()
                 .id(id)
@@ -47,8 +51,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void deleteUser(int id) {
-        userRepository.deleteById(id);
+        User userToBeDeleted = userRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("User not found with id: " + id)
+        );
+        userRepository.delete(userToBeDeleted);
     }
 
     @Override

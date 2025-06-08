@@ -12,6 +12,7 @@ import my_project.mini_social_network.security.JwtUtils;
 import my_project.mini_social_network.services.AuthService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +23,7 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
+    @Transactional
     public AuthResponse registerUser(AuthRequest authRequest) {
         if (userRepository.findByEmail(authRequest.getEmail()).isPresent()) {
             throw new ConflictException("this email already exists!");

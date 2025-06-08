@@ -13,4 +13,7 @@ public class UserRequest {
     @Email(message = "Введенный Email некорректен")
     private String email;
 
+    @NotBlank(message = "Пароль не может быть пустым!")
+    private String password;
+
 }

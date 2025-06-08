@@ -3,15 +3,11 @@ package my_project.mini_social_network.aspects;
 
 import lombok.RequiredArgsConstructor;
 import my_project.mini_social_network.annotations.IsOwnerOrAdmin;
-import my_project.mini_social_network.dto.requests.UserRequest;
 import my_project.mini_social_network.exceptions.ResourceNotFoundException;
 import my_project.mini_social_network.models.Comment;
 import my_project.mini_social_network.models.Post;
 import my_project.mini_social_network.models.User;
 import my_project.mini_social_network.repositories.UserRepository;
-import my_project.mini_social_network.services.CommentService;
-import my_project.mini_social_network.services.PostService;
-import my_project.mini_social_network.services.UserService;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;

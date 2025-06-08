@@ -1,6 +1,7 @@
 package my_project.mini_social_network.controllers;
 
 import lombok.RequiredArgsConstructor;
+import my_project.mini_social_network.annotations.IsAdmin;
 import my_project.mini_social_network.annotations.IsOwnerOrAdmin;
 import my_project.mini_social_network.dto.requests.UserRequest;
 import my_project.mini_social_network.dto.responses.UserResponse;
@@ -20,6 +21,7 @@ public class UserController {
 
 
     @PostMapping
+    @IsAdmin
     public UserResponse createUser(@RequestBody UserRequest requestUser) {
         return userService.saveUser(requestUser);
     }
