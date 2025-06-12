@@ -1,21 +1,27 @@
 spring:
+#  config:
+#    import: optional:file:.env[.properties]
   application:
     name: mini-social-network
+
   datasource:
-    username: postgres
-    password: 30082005DataBase
-    url: jdbc:postgresql://localhost:5432/mini_social_network_db
+    url: jdbc:postgresql://host.docker.internal:5432/mini_social_network_db
     driver-class-name: org.postgresql.Driver
+    password: 30082005DataBase
+    username: postgres
+
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
     properties:
       hibernate:
         format_sql: true
-  flyway:
-    enabled: true
-    locations: classpath:db/migration
-    baseline-on-migrate: true
+
 jwt:
   secret: gh23hj45f3g2h45f234hfg5235hj2ya23jhh
   expiresIn: 3600000
+
+logging:
+  level:
+    org.flywaydb: DEBUG
+    org.springframework.jdbc: DEBUG

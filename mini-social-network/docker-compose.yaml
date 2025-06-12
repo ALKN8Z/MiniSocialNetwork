@@ -1,0 +1,67 @@
+volumes:
+  db_data:
+    driver: local
+
+networks:
+  app_network:
+    name: app_network
+    driver: bridge
+
+services:
+  db_for_app:
+    image: postgres:17.0-alpine
+    container_name: app_db
+    restart: on-failure
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 30082005DataBase
+      POSTGRES_DB: mini_social_network_db
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d mini_social_network_db"]
+      interval: 1s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - app_network
+
+    volumes:
+      - db_data:/var/lib/postgresql/data
+#      - .src/main/resources/db/migration:/migrations
+  flyway:
+    image: flyway/flyway:latest
+    container_name: flyway_migrations
+    depends_on:
+      db_for_app:
+        condition: service_healthy
+    restart: on-failure
+    environment:
+      - FLYWAY_URL=jdbc:postgresql://db_for_app:5432/mini_social_network_db
+      - FLYWAY_USER=postgres
+      - FLYWAY_PASSWORD=30082005DataBase
+    volumes:
+      - ./src/main/resources/db/migration:/flyway/sql
+
+    command: migrate
+    networks:
+      - app_network
+
+  app:
+    build:
+      context: .
+    container_name: mini_social_network_app
+    restart: always
+    depends_on:
+      flyway:
+        condition: service_completed_successfully
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db_for_app:5432/mini_social_network_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 30082005DataBase
+    networks:
+      - app_network
+
+    ports:
+      - "8080:8080"
+
